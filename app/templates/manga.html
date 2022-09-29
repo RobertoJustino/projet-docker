@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/w3.css">
+    <title></title>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #04AA6D;
+        }
+    </style>
+</head>
+
+<body>
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/mangas">Manga</a></li>
+    <li><a href="/users">Utilisateur</a></li>
+    <li style="float:right">
+        <form  action="/logout" method="post">
+            <input type="submit" value="Déconnexion" class="active"/>
+        </form></li>
+</ul>
+
+<div class="card w3-padding-16">
+    <a href="/manga/{{row[0]}}">
+        <img class="card-img-top" width="300" height="400"
+            src="{{row[2]}}"
+        />
+    </a>
+    <h1><p text="{{row[1]}}" ></p></h1>
+    <p  text="'Année : ' +{{row[5]}}" ></p>
+    <p class="price">
+    <p  text="'Auteur : ' +${row[3]}" ></p>
+    </p>
+    <p>
+    <h2>Description</h2>
+    <p  text="{{row[4]}}" ></p>
+
+    <a  href="/mangas/edit/{{row[0]}}" class="w3-button w3-block w3-dark-grey" >Modifier</a>
+</div>
+<br>
+<div class="w3-card-4 w3-third w3-margin">
+
+    <header class="w3-container w3-light-grey">
+        <h3>Genre</h3>
+    </header>
+
+    <div class="w3-container">
+        <!-- <div>
+            < block  each="gen: ${manga.genres}">
+                <p  text="${gen.name}" />
+            </ block>
+        </div> -->
+    </div>
+</div>
+
+<div class="w3-card-4 w3-half w3-right w3-margin">
+
+    <header class="w3-container w3-light-grey">
+        <h3>Commentaires</h3>
+    </header>
+
+    <div class="w3-container">
+        <!-- <div class="ui-icon-star">
+            < block  each="rev: ${manga.review}">
+                <p  text="${rev.review}" />
+                <p  text="'Note : ' + ${rev.note} + '/5'" />
+                <p><a  href="@{'/mangas/list/details/delete/' + ${rev.id}}" class="w3-button w3-red w3-round-large">Supprimer</a></p>
+                <hr>
+            </ block>
+        </div> -->
+    </div>
+</div>
+
+</body>
+</html>

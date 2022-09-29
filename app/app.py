@@ -59,7 +59,7 @@ def add_manga():
         flash('User added successfully!')
         cursor.close()
         conn.close()
-        return redirect('/')
+        return redirect('/mangas')
     else:
         cursor.close()
         conn.close()
@@ -70,6 +70,29 @@ def add_manga():
 def add_manga_form():
 	return render_template('manga_form.html')
 
+
+@app.route('/manga/<int:id>')
+def manga_view(id):
+    config = {
+        'user': 'root',
+        'password': 'root',
+        'host': 'db',
+        'port': '3306',
+        'database': 'goodreads'
+    }
+    conn = mysql.connector.connect(**config)
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM mangas WHERE id= '%s'", id)
+    conn.commit
+    row = cursor.fetchone()
+    if row:
+        cursor.close()
+        conn.close()
+        return render_template('manga.html', row=row)
+    else:
+        cursor.close()
+        conn.close()
+        return 'Error loading #{id}'.format(id=id)
 
 
 if __name__ == '__main__':

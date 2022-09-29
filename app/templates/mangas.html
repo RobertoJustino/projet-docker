@@ -60,7 +60,7 @@
         <p>
             {% with messages = get_flashed_messages() %}
               {% if messages %}
-                <ul class=flashes>
+                <ul class="w3-green">
                 {% for message in messages %}
                   <li>{{ message }}</li>
                 {% endfor %}
@@ -89,6 +89,8 @@
                     <td>{{ d[3] }}</td>
                     <td>{{ d[4] }}</td>
                     <td>{{ d[5] }}</td>
+                    <td><a href="/manga/{{d[0]}}" class="w3-button w3-white w3-border w3-border-green w3-round-large">Details</a></td>
+                    <td><a href="/manga/delete/{{d[0]}}" class="w3-button w3-white w3-border w3-border-red w3-round-large">Supprimer</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
