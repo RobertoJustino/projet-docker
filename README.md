@@ -9,11 +9,22 @@ docker exec -it projet-docker_db_1 bash
 mysql -uroot -proot
 
 
+```
 .
 ├── app
 │   ├── app.py
 │   ├── Dockerfile
-│   └── requirements.txt
+│   ├── __pycache__
+│   │   └── app.cpython-39.pyc
+│   ├── requirements.txt
+│   ├── static
+│   │   └── css
+│   │       └── w3.css
+│   └── templates
+│       ├── index.html
+│       ├── manga_form.html
+│       ├── manga.html
+│       └── mangas.html
 ├── db
 │   └── init.sql
 ├── docker-compose.yml
@@ -22,3 +33,4 @@ mysql -uroot -proot
     └── test.py
 
 
+```
