@@ -1,7 +1,6 @@
 from typing import List, Dict
 from flask import Flask, render_template, request, flash, redirect
 import mysql.connector
-import json
 import sys
 
 app=Flask(__name__,template_folder='templates')
@@ -20,6 +19,7 @@ config = {
 def index():
     return render_template('index.html')
 
+# READ ALL MANGA
 def mangas():
     connection = mysql.connector.connect(**config)
     cursor = connection.cursor()
@@ -30,11 +30,12 @@ def mangas():
 
     return results
 
+# LIST MANGA
 @app.route('/mangas')
 def listMangas():
     return render_template('mangas.html', data=mangas())
 
-		
+# CREATE		
 @app.route('/manga/create', methods=['POST'])
 def add_manga():
     _title = request.form['inputTitle']
@@ -61,33 +62,48 @@ def add_manga():
         return 'Error while adding user'
     
 
+# FORMULAIRE ADD
 @app.route('/add_manga')
 def add_manga_form():
 	return render_template('manga_form.html')
 
-
+# AFFICHER UN MANGA
 @app.route('/manga/<int:id>', methods=["GET"])
 def manga_view(id):
     conn = mysql.connector.connect(**config)
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM mangas WHERE id=%s", (id,))
     row = cursor.fetchone()
+    cursor.execute("SELECT * FROM mangas a join manga_genre b on a.id = b.manga_id join genres c on b.genre_id = c.id  where a.id=%s", (id,))
+    genres = cursor.fetchall()
     conn.commit()
-    print(row, file=sys.stderr)
     if row:
         cursor.close()
         conn.close()
-        return render_template('manga.html', row=row)
+        return render_template('manga.html', row=row, genres=genres)
     else:
         cursor.close()
         conn.close()
         return 'Error loading #{id}'.format(id=id)
 
-@app.route('/update_manga')
-def add_manga_form_update():
-	return render_template('manga_form_update.html')
+# FORMULAIRE UPDATE
+@app.route('/update_manga/<int:id>', methods=["GET"])
+def add_manga_form_update(id):
+    conn = mysql.connector.connect(**config)
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM mangas WHERE id=%s", (id,))
+    row = cursor.fetchone()
+    conn.commit()
+    if row:
+        cursor.close()
+        conn.close()
+        return render_template('manga_form_update.html', row=row)
+    else:
+        cursor.close()
+        conn.close()
+        return 'Error loading #{id}'.format(id=id)
 
-
+# UPDATE
 @app.route('/manga/update', methods=['POST'])
 def update_manga():
     _title = request.form['inputTitle']
@@ -114,7 +130,7 @@ def update_manga():
         return 'Error while updating user'
 		
 
-
+# DELETE
 @app.route('/manga/delete/<int:id>')
 def delete_user(id):
     conn = mysql.connector.connect(**config)

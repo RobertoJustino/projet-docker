@@ -47,22 +47,22 @@
         </form></li>
 </ul>
 
-<div class="card w3-padding-16">
+<div class="w3-card-4 w3-padding-top-32 w3-center">
     <a href="/manga/{{row[0]}}">
-        <img class="card-img-top w3-center" width="300" height="400"
+        <img class="w3-card-4" width="300" height="400"
             src="{{row[2]}}"
         />
     </a>
-    <h1><p text="{{row[1]}}" ></p></h1>
-    <p  text="'Année : ' +{{row[5]}}" ></p>
+    <h1><p text="" ></p>{{row[1]}}</h1>
+    <p  text="" >Année : {{row[5]}}</p>
     <p class="price">
-    <p  text="'Auteur : ' +${row[3]}" ></p>
+    <p  text="" >Auteur : {{row[3]}}</p>
     </p>
     <p>
     <h2>Description</h2>
-    <p  text="{{row[4]}}" ></p>
+    <p  text="">{{row[4]}}</p>
 
-    <a  href="/update_manga" class="w3-button w3-block w3-dark-grey" >Modifier</a>
+    <a  href="/update_manga/{{row[0]}}" class="w3-button w3-block w3-dark-grey" >Modifier</a>
 </div>
 <br>
 <div class="w3-card-4 w3-third w3-margin">
@@ -72,11 +72,11 @@
     </header>
 
     <div class="w3-container">
-        <!-- <div>
-            < block  each="gen: ${manga.genres}">
-                <p  text="${gen.name}" />
-            </ block>
-        </div> -->
+        <div>
+            {% for g in genres %}
+                <p  text="">{{g[1]}}</p>
+            {% endfor %}
+        </div>
     </div>
 </div>
 
