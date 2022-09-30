@@ -30,17 +30,26 @@ create table IF NOT EXISTS users (
      email varchar(255) ,
      PRIMARY KEY (id)
 );
-create table IF NOT EXISTS reviews_manga (
+
+create table IF NOT EXISTS reviews (
     id int NOT NULL AUTO_INCREMENT,
     user_id int NOT NULL,
-    manga_id int NOT NULL,
     review text,
     note int,
 	created_at date,
     PRIMARY KEY(id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+create table IF NOT EXISTS reviews_manga (
+    id int NOT NULL AUTO_INCREMENT,
+    reviews_id int NOT NULL,
+    manga_id int NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY (reviews_id) REFERENCES reviews(id),
     FOREIGN KEY (manga_id) REFERENCES mangas(id)
 );
+
 create table IF NOT EXISTS roles (
         id int NOT NULL AUTO_INCREMENT,
         name varchar(255),
@@ -76,6 +85,10 @@ insert manga_genre values (null, 1,8);
 
 insert users values (null, 'otaku75', 'password', 'otaku75@gmail.com');
 
-insert reviews_manga values (null, 1,1,'Un manga incroyable !', 5,now());
-insert reviews_manga values (null, 1,1,'Excellent', 5,now());
-insert reviews_manga values (null, 1,9,"J'aime beaucoup", 4,now());
+insert reviews values (null, 1,'Un manga incroyable !', 5,now());
+insert reviews values (null, 1,'Excellent', 5,now());
+insert reviews values (null, 1,"J'aime beaucoup", 4,now());
+
+insert reviews_manga values (null, 1,1);
+insert reviews_manga values (null, 1,1);
+insert reviews_manga values (null, 1,1);

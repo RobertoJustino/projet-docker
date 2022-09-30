@@ -50,25 +50,26 @@
     <header class="w3-container w3-blue w3-center">
         <h1>Ajout d'un manga</h1>
     </header>
-    <form method="post" action="/manga/create">
+    <form method="post" action="/manga/update">
         <dl>
             <p>
-                Titre : <input name="inputTitle" value="" type="text" placeholder="Titre" required>
+                Titre : <input name="inputTitle" value="{{ row[1] }}" type="text" placeholder="Titre" required>
             </p>
             <p>
-                Image URL : <input name="inputImage" value="" type="text" placeholder="URL Image" required>
+                Image URL : <input name="inputImage" value="{{ row[2] }}" type="text" placeholder="URL Image" required>
             </p>
             <p>
-                Auteur : <input name="inputAuteur" value="" type="text" placeholder="Auteur" required>
+                Auteur : <input name="inputAuteur" value="{{ row[3] }}" type="text" placeholder="Auteur" required>
             </p>
             <p>
-                Desription : <input name="inputDescription" value="" type="text" placeholder="Description" required>
+                Desription : <input name="inputDescription" value="{{ row[4] }}" type="text" placeholder="Description" required>
             </p>
             <p>
-                Année : <input name="inputYear" value="" type="text" placeholder="Année" required>
+                Année : <input name="inputYear" value="{{ row[(5)] }}" type="text" placeholder="Année" required>
             </p>
         </dl>
         <p>
+            <input name="id" value="{{ row[0] }}" type="hidden">
             <input type="submit" value="Submit">
         </p>
     </form>

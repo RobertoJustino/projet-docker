@@ -5,8 +5,9 @@
 docker-compose up 
 
 # Lancer MySQL
-docker exec -it projet-docker_db_1 bash
-mysql -uroot -proot
+
+  docker exec -it projet-docker_db_1 bash  
+  mysql -uroot -proot
 
 
 ```
@@ -34,3 +35,6 @@ mysql -uroot -proot
 
 
 ```
+
+
+![image](Modèle_BDD.png)
