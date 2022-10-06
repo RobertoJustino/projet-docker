@@ -74,7 +74,7 @@
     <div class="w3-container">
         <div>
             {% for g in genres %}
-                <p  text="">{{g[10]}}</p>
+                <p  text="">{{g[0]}}</p>
             {% endfor %}
         </div>
     </div>
@@ -87,14 +87,13 @@
     </header>
 
     <div class="w3-container">
-        <!-- <div class="ui-icon-star">
-            < block  each="rev: ${manga.review}">
-                <p  text="${rev.review}" />
-                <p  text="'Note : ' + ${rev.note} + '/5'" />
-                <p><a  href="@{'/mangas/list/details/delete/' + ${rev.id}}" class="w3-button w3-red w3-round-large">Supprimer</a></p>
-                <hr>
-            </ block>
-        </div> -->
+        <div class="ui-icon-star">
+            {% for r in reviews %}
+                <p text="">{{r[2]}}</p>
+                <p text="" >Note : {{r[3]}}/5</p>
+                <p><a href="/review/delete/{{r[0]}}" class="w3-button w3-red w3-round-large">Supprimer</a></p>
+            {% endfor %}
+        </div>
     </div>
 </div>
 

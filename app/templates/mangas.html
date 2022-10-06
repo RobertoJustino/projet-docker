@@ -50,10 +50,9 @@
         <br>
         <form  action="/mangas" class="w3-container w3-padding-top-32">
             <label class="w3-text-teal"><b>Filtre</b></label>
-            <input type="text" name="keyword" id="keyword" size="50"  value="">
-        
-            <input type="submit" value="Recherche" class="w3-btn w3-blue-grey"/>
-            <!-- <input type="button" value="Clear" id="btnClear" class="w3-btn w3-blue-grey" onclick="clearSearch()" /> -->
+            <input type="text" name="keyword" id="keyword" size="50" value="" onkeyup="myFunction()">
+    
+            <input type="button" value="Clear" id="btnClear" class="w3-btn w3-blue-grey" onclick="clearSearch()" />
         </form>
         <br>
         <a  href="/add_manga" class="w3-button w3-circle w3-blue w3-right w3-margin">+</a>
@@ -69,7 +68,7 @@
             {% endwith %}
         </p>
         <br>
-        <table class="w3-table-all w3-card-4">
+        <table id="myTable" class="w3-table-all w3-card-4">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -97,8 +96,30 @@
         </table>
     </body>
 </html>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
     function clearSearch() {
-        window.location = "[[@{/mangas/list}]]";
+        window.location = "/mangas";
     }
-</script> -->
+
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("keyword");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+            }
+        }
+    }
+</script>

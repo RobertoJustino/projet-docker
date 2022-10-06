@@ -46,8 +46,8 @@ create table IF NOT EXISTS reviews_manga (
     reviews_id int NOT NULL,
     manga_id int NOT NULL,
     PRIMARY KEY(id),
-    FOREIGN KEY (reviews_id) REFERENCES reviews(id),
-    FOREIGN KEY (manga_id) REFERENCES mangas(id)
+    FOREIGN KEY (reviews_id) REFERENCES reviews(id) ON DELETE CASCADE,
+    FOREIGN KEY (manga_id) REFERENCES mangas(id) ON DELETE CASCADE
 );
 
 create table IF NOT EXISTS roles (
@@ -92,3 +92,6 @@ insert reviews values (null, 1,"J'aime beaucoup", 4,now());
 insert reviews_manga values (null, 1,1);
 insert reviews_manga values (null, 1,1);
 insert reviews_manga values (null, 1,1);
+insert reviews_manga values (null, 2,1);
+insert reviews_manga values (null, 3,1);
+insert reviews_manga values (null, 2,1);

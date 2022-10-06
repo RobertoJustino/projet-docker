@@ -74,13 +74,15 @@ def manga_view(id):
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM mangas WHERE id=%s", (id,))
     row = cursor.fetchone()
-    cursor.execute("SELECT * FROM mangas a join manga_genre b on a.id = b.manga_id join genres c on b.genre_id = c.id  where a.id=%s", (id,))
+    cursor.execute("SELECT name FROM mangas a join manga_genre b on a.id = b.manga_id join genres c on b.genre_id = c.id  where a.id=%s", (id,))
     genres = cursor.fetchall()
+    cursor.execute("SELECT * FROM reviews a join reviews_manga b on a.id = b.reviews_id join mangas c on b.manga_id = c.id  where c.id=%s", (id,))
+    reviews = cursor.fetchall()
     conn.commit()
     if row:
         cursor.close()
         conn.close()
-        return render_template('manga.html', row=row, genres=genres)
+        return render_template('manga.html', row=row, genres=genres, reviews=reviews)
     else:
         cursor.close()
         conn.close()
