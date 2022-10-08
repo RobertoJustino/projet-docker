@@ -1,5 +1,5 @@
 from typing import List, Dict
-from flask import Flask, render_template, request, flash, redirect
+from flask import Flask, render_template, request, flash, redirect, jsonify
 import mysql.connector
 import sys
 
@@ -34,6 +34,11 @@ def mangas():
 @app.route('/mangas')
 def listMangas():
     return render_template('mangas.html', data=mangas())
+
+# LIST MANGA API
+@app.route('/api/mangas')
+def listMangasAPI():
+    return jsonify(mangas())
 
 # CREATE		
 @app.route('/manga/create', methods=['POST'])
@@ -83,6 +88,57 @@ def manga_view(id):
         cursor.close()
         conn.close()
         return render_template('manga.html', row=row, genres=genres, reviews=reviews)
+    else:
+        cursor.close()
+        conn.close()
+        return 'Error loading #{id}'.format(id=id)
+
+# AFFICHER UN MANGA API
+@app.route('/api/mangas/<int:id>', methods=["GET"])
+def manga_view_api(id):
+    conn = mysql.connector.connect(**config)
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM mangas WHERE id=%s", (id,))
+    row = cursor.fetchone()
+    conn.commit()
+    if row:
+        cursor.close()
+        conn.close()
+        return jsonify(row)
+    else:
+        cursor.close()
+        conn.close()
+        return 'Error loading #{id}'.format(id=id)
+
+# AFFICHER LES GENRES D'UN MANGA API
+@app.route('/api/mangas/<int:id>/genres', methods=["GET"])
+def manga_view_genres_api(id):
+    conn = mysql.connector.connect(**config)
+    cursor = conn.cursor()
+    cursor.execute("SELECT name FROM mangas a join manga_genre b on a.id = b.manga_id join genres c on b.genre_id = c.id  where a.id=%s", (id,))
+    genres = cursor.fetchall()
+    conn.commit()
+    if genres:
+        cursor.close()
+        conn.close()
+        return jsonify(genres)
+    else:
+        cursor.close()
+        conn.close()
+        return 'Error loading #{id}'.format(id=id)
+
+# AFFICHER LES REVIEWS D'UN MANGA API
+@app.route('/api/mangas/<int:id>/reviews', methods=["GET"])
+def manga_view_reviews_api(id):
+    conn = mysql.connector.connect(**config)
+    cursor = conn.cursor()
+    cursor.execute("SELECT review FROM reviews a join reviews_manga b on a.id = b.reviews_id join mangas c on b.manga_id = c.id  where c.id=%s", (id,))
+    reviews = cursor.fetchall()
+    conn.commit()
+    if reviews:
+        cursor.close()
+        conn.close()
+        return jsonify(reviews)
     else:
         cursor.close()
         conn.close()

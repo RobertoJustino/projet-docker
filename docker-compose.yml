@@ -19,9 +19,12 @@ services:
       - ./db:/docker-entrypoint-initdb.d/:ro
       - .:/app
   
+  #frontend:
+    
+
   tests:
     build: ./app
     volumes:
       - ./db:/docker-entrypoint-initdb.d/:ro
       - .:/app
-    command: ["pytest","./app/tests/test.py"]
+    command: ["pytest","./tests/test.py"]

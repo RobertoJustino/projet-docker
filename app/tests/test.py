@@ -1,6 +1,12 @@
-from tests.conftest import client
+import pytest
+from app import app
 
 
-def test_should_status_code_ok(client):
-	response = client.get('/')
-	assert response.status_code == 200
+
+@pytest.fixture
+def client():
+    return app.test_client()
+
+def test_home(client):
+    resp = client.get('/')
+    assert resp.status_code == 200
