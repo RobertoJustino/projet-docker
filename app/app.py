@@ -1,9 +1,12 @@
 from typing import List, Dict
 from flask import Flask, render_template, request, flash, redirect, jsonify
+from flask_cors import CORS, cross_origin
 import mysql.connector
 import sys
 
 app=Flask(__name__,template_folder='templates')
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 app.secret_key = 'secret key'
 
@@ -38,7 +41,17 @@ def listMangas():
 # LIST MANGA API
 @app.route('/api/mangas')
 def listMangasAPI():
-    return jsonify(mangas())
+
+    connection = mysql.connector.connect(**config)
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM mangas')
+    row_headers=[x[0] for x in cursor.description] #this will extract row headers
+    rv = cursor.fetchall()
+    json_data=[]
+    for result in rv:
+        json_data.append(dict(zip(row_headers,result)))
+
+    return jsonify(json_data)
 
 # CREATE		
 @app.route('/manga/create', methods=['POST'])

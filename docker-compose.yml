@@ -1,11 +1,25 @@
 version: "2"
 services:
+
+  frontend:
+    build: ./frontend
+    links:
+      - app
+    ports:
+      - "3001:8080"
+    networks:
+      - frontend
+      
+
   app:
     build: ./app
     links:
       - db
     ports:
       - "5000:5000"
+    networks:
+      - frontend
+      - backend
 
   db:
     image: mysql:5.7
@@ -18,13 +32,18 @@ services:
     volumes:
       - ./db:/docker-entrypoint-initdb.d/:ro
       - .:/app
-  
-  #frontend:
+    networks:
+      - backend
     
-
   tests:
     build: ./app
     volumes:
       - ./db:/docker-entrypoint-initdb.d/:ro
       - .:/app
     command: ["pytest","./tests/test.py"]
+    
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
