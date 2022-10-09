@@ -54,6 +54,8 @@ docker-compose up
 
 ![image](Modèle_BDD.png)
 
+# docker-compose up : Résultats Terminal
+
 ```
 └─$ docker-compose up   
 Starting projet-docker_db_1 ... done
@@ -148,3 +150,16 @@ Build finished at 20:30:53 by 0.000s
 
 
 ```
+
+# Docker Health Check
+
+```
+48e68be20a93   projet-docker_frontend   "docker-entrypoint.s…"   45 seconds ago   Up 43 seconds (health: starting)   0.0.0.0:3001->8080/tcp, :::3001->8080/tcp                projet-docker_frontend_1
+ccc3ebce7296   projet-docker_app        "/bin/sh -c 'python …"   46 seconds ago   Up 44 seconds (health: starting)   0.0.0.0:5000->5000/tcp, :::5000->5000/tcp                projet-docker_app_1
+c1fc66182018   mysql:5.7                "docker-entrypoint.s…"   48 seconds ago   Up 46 seconds (health: starting)   33060/tcp, 0.0.0.0:32000->3306/tcp, :::32000->3306/tcp   projet-docker_db_1
+
+```
+
+# docker-projet_app push sur docker hub
+
+https://hub.docker.com/r/roberto8/projet-docker_app

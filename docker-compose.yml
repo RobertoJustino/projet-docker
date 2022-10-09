@@ -7,6 +7,11 @@ services:
       - app
     ports:
       - "3001:8080"
+    healthcheck:
+      test: curl --fail -s http://localhost:8080/ || exit 1
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
     networks:
       - frontend
       
@@ -17,6 +22,11 @@ services:
       - db
     ports:
       - "5000:5000"
+    healthcheck:
+      test: curl --fail -s http://localhost:5000/ || exit 1
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
     networks:
       - frontend
       - backend
@@ -32,6 +42,11 @@ services:
     volumes:
       - ./db:/docker-entrypoint-initdb.d/:ro
       - .:/app
+    healthcheck:
+      test: curl --fail -s http://localhost:3306/ || exit 1
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
     networks:
       - backend
     
