@@ -67,6 +67,16 @@
             <p>
                 Année : <input name="inputYear" value="" type="text" placeholder="Année" required>
             </p>
+            <p>
+                <label class="w3-text-teal"><b>Genre : </b></label>
+                <br>
+                {% for genre in genres %}
+                    <input name="listGenres" type="checkbox"
+                            value="{{ genre[0] }}" class="w3-check" />
+                    <label text="">{{ genre[1] }}</label>
+                    <br>
+                {% endfor %}
+            </p>
         </dl>
         <p>
             <input type="submit" value="Submit">

@@ -37,10 +37,14 @@ services:
     
   tests:
     build: ./app
+    links:
+      - db
     volumes:
       - ./db:/docker-entrypoint-initdb.d/:ro
       - .:/app
-    command: ["pytest","./tests/test.py"]
+    command: ["pytest","./app/tests/test.py"]
+    networks:
+      - backend
     
 networks:
   frontend:

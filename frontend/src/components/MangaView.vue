@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       currentManga: null,
-      genre: null,
+      currentMangaGenres: null,
       commentBox: '',
     }
   },
@@ -32,6 +32,12 @@ export default {
       .then((response) => {
         this.currentManga = response.data;
         console.log(this.currentManga)
+      })
+    axios
+      .get('http://localhost:5000/api/mangas/' + this.$route.params.id + '/genres')
+      .then((response) => {
+        this.currentMangaGenres = response.data;
+        console.log(this.currentMangaGenres)
       })
   },
   computed: {
@@ -63,41 +69,40 @@ export default {
     <div>
       <ul>
         <li><a class="active" href="../">Accueil</a></li>
-        <li><a href="/anime">Animes</a></li>
         <li><a href="/manga">Mangas</a></li>
         <li><a href="/login">Connexion</a></li>
         <li><a href="/profile">Profil</a></li>
       </ul>
     </div>
     <div>
-      <h1 v-if="currentManga">{{ currentManga.title }}</h1>
+      <h1 v-if="currentManga">{{ currentManga[0].title }}</h1>
       <div class="card">
-        <img v-if="currentManga" :src="currentManga.img_src" alt="Photo d'illustration du manga.">
+        <img v-if="currentManga" :src="currentManga[0].img_src" alt="Photo d'illustration du manga.">
         <h4>
           Année de parution
         </h4>
         <p v-if="currentManga">
-          {{ currentManga.year }}
+          {{ currentManga[0].year }}
         </p>
         <h4>
           Synopsis
         </h4>
         <p v-if="currentManga">
-          {{ currentManga.description }}
+          {{ currentManga[0].description }}
         </p>
         <h4>
           Auteur | Réalisateur
         </h4>
         <p v-if="currentManga">
-          {{ currentManga.author }}
+          {{ currentManga[0].author }}
         </p>
         <h4>
           Genre
         </h4>
-        <div v-if="currentManga">
-          <div v-for="index in currentManga.genres.length" :key="index">
-            <p v-if="currentManga">
-              {{ currentManga.genres[index - 1].name }}
+        <div v-if="currentMangaGenres">
+          <div v-for="genre in currentMangaGenres" :key="genre.name">
+            <p v-if="genre">
+              {{ genre.name }}
             </p>
 
           </div>
