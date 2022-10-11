@@ -152,7 +152,11 @@ Build finished at 20:30:53 by 0.000s
 
 ```
 
-# Docker Health Check
+# Test Backend + BDD
+
+Les tests se trouvent dans le fichier test.py. Des tests de requêtes GET et un test de la connexion sur la base de données sont effectués. Vous pouvez qu'ils passent sur l'extrait du terminal ci-dessus.
+
+# Docker Health Check Test
 
 ```
 48e68be20a93   projet-docker_frontend   "docker-entrypoint.s…"   45 seconds ago   Up 43 seconds (health: starting)   0.0.0.0:3001->8080/tcp, :::3001->8080/tcp                projet-docker_frontend_1
