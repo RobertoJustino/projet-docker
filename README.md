@@ -8,8 +8,21 @@
 │   ├── __pycache__
 │   ├── requirements.txt
 │   ├── static
+│   │   └── css
+│   │       └── w3.css
 │   ├── templates
+│   │   ├── index.html
+│   │   ├── layout.html
+│   │   ├── login.html
+│   │   ├── manga_form.html
+│   │   ├── manga_form_update.html
+│   │   ├── manga.html
+│   │   ├── mangas.html
+│   │   ├── register.html
+│   │   └── users.html
 │   └── tests
+│       ├── __init__.py
+│       └── test.py
 ├── db
 │   └── init.sql
 ├── docker-compose.yml
@@ -31,8 +44,6 @@
 └── README.md
 
 ```
-  La commande Tree est limité à 2 branches car le Front dispose de beaucoup de fichiers.
-
 
 # Lancer le projet 
 ###  Se mettre à la racine du projet : où se trouve le fichier docker-compose.yml
