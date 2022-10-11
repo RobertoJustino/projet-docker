@@ -31,6 +31,7 @@
 └── README.md
 
 ```
+  La commande Tree est limité à 2 branches car le front dispose de beaucoup de fichiers.
 
 
 # Lancer le projet 
