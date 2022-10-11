@@ -168,9 +168,12 @@ Les tests se trouvent dans le fichier test.py. Des tests de requêtes GET et un 
 # Docker Health Check Test
 
 ```
-48e68be20a93   projet-docker_frontend   "docker-entrypoint.s…"   45 seconds ago   Up 43 seconds (health: starting)   0.0.0.0:3001->8080/tcp, :::3001->8080/tcp                projet-docker_frontend_1
-ccc3ebce7296   projet-docker_app        "/bin/sh -c 'python …"   46 seconds ago   Up 44 seconds (health: starting)   0.0.0.0:5000->5000/tcp, :::5000->5000/tcp                projet-docker_app_1
-c1fc66182018   mysql:5.7                "docker-entrypoint.s…"   48 seconds ago   Up 46 seconds (health: starting)   33060/tcp, 0.0.0.0:32000->3306/tcp, :::32000->3306/tcp   projet-docker_db_1
+└─$ docker ps
+CONTAINER ID   IMAGE                          COMMAND                  CREATED             STATUS                            PORTS                                                    NAMES
+6b6a0d42d7bf   roberto8/projet-docker-front   "docker-entrypoint.s…"   32 minutes ago      Up 2 minutes (health: starting)   0.0.0.0:3001->8080/tcp, :::3001->8080/tcp                projet-docker_frontend_1
+2ce73e5c24ea   roberto8/projet-docker-app     "/bin/sh -c 'python …"   32 minutes ago      Up 2 minutes (healthy)            0.0.0.0:5000->5000/tcp, :::5000->5000/tcp                projet-docker_app_1
+e8d35e7da56f   projet-docker_nginx            "nginx -g 'daemon of…"   About an hour ago   Up 2 minutes                      0.0.0.0:80->80/tcp, :::80->80/tcp, 8080/tcp              nginx
+c1fc66182018   mysql:5.7                      "docker-entrypoint.s…"   42 hours ago        Up 2 minutes (healthy)            33060/tcp, 0.0.0.0:32000->3306/tcp, :::32000->3306/tcp   projet-docker_db_1
 
 ```
 
