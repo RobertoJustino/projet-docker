@@ -3,6 +3,7 @@ services:
 
   frontend:
     build: ./frontend
+    image: roberto8/projet-docker-front
     links:
       - app
     ports:
@@ -18,6 +19,7 @@ services:
 
   app:
     build: ./app
+    image: roberto8/projet-docker-app
     links:
       - db
     ports:
@@ -52,6 +54,7 @@ services:
     
   tests:
     build: ./app
+    image: roberto8/projet-docker-tests
     links:
       - db
     volumes:
