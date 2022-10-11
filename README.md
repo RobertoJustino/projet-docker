@@ -154,7 +154,7 @@ Build finished at 20:30:53 by 0.000s
 
 # Test Backend + BDD
 
-Les tests se trouvent dans le fichier test.py. Des tests de requêtes GET et un test de la connexion sur la base de données sont effectués. Vous pouvez qu'ils passent sur l'extrait du terminal ci-dessus.
+Les tests se trouvent dans le fichier test.py. Des tests de requêtes GET et un test de la connexion sur la base de données sont effectués. Vous pouvez voir qu'ils passent sur l'extrait du terminal ci-dessus.
 
 # Docker Health Check Test
 
