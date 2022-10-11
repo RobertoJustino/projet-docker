@@ -1,7 +1,8 @@
 from typing import List, Dict
-from flask import Flask, render_template, request, flash, redirect, jsonify
+from flask import Flask, render_template, request, flash, redirect, jsonify, session
 from flask_cors import CORS, cross_origin
 import mysql.connector
+import re
 import sys
 
 app=Flask(__name__,template_folder='templates')
@@ -21,6 +22,8 @@ config = {
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
 
 # ---------------------------------- MANGA ------------------------------------------
 

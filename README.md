@@ -35,7 +35,8 @@
 
 # Lancer le projet 
 ###  Se mettre à la racine du projet : où se trouve le fichier docker-compose.yml
-docker-compose up 
+  Build le projet : docker-compose build  
+  Lancer le projet : docker-compose up 
 
 # Lancer MySQL
 

@@ -1,51 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../static/css/w3.css">
-    <style>
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        li {
-            float: left;
-        }
-
-        li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        li a:hover:not(.active) {
-            background-color: #111;
-        }
-
-        .active {
-            background-color: #04AA6D;
-        }
-    </style>
-</head>
-
-<body>
-<ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/mangas">Manga</a></li>
-    <li><a href="/users">Utilisateur</a></li>
-    <li style="float:right">
-        <form action="/logout" method="post">
-            <input type="submit" value="Déconnexion" class="active"/>
-        </form></li>
-</ul>
+{% extends 'layout.html' %}
+{% block content %}
 <div class="container text-center">
     <header class="w3-container w3-blue w3-center">
         <h1>Ajout d'un manga</h1>
@@ -83,5 +37,4 @@
         </p>
     </form>
 </div>
-</body>
-</html>
+{% endblock %}
