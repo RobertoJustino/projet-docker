@@ -72,6 +72,7 @@ services:
     # pass 80 from host machine to 80 of the image filesystem
     ports:
         - "80:80"
+        - "443:443"
     networks:
       - frontend
     
